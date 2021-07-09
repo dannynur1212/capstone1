@@ -181,28 +181,28 @@ def main(subject, \
   contact_file='templates/contacts.txt', \
   template_file='templates/body.txt', \
   data_file='data_input/data.csv'):
-  """   
+    """   
   Main function for application
   """
 
-  # // TODO: CHALLENGE 1
-  # // Understanding function
-  names, emails = extract_contacts(contact_file=contact_file)
+    # // TODO: CHALLENGE 1
+    # // Understanding function
+    names, emails = extract_contacts(contact_file=contact_file)
 
-  # // TODO: CHALLENGE 2
-  # // Extract data and prepare template email
-  template = create_template(template_file)
-  data_dict = extract_summary(data_file)
+    # // TODO: CHALLENGE 2
+    # // Extract data and prepare template email
+    template = create_template(template_file)
+    data_dict = extract_summary(data_file)
 
-  # // TODO: CHALLENGE 3
-  # // Log in into Outlook email account
-  # // Please use environment variable for security purposes
-  s = authenticate_account(EMAIL=os.environ['EMAIL_ADDRESS'], \
-    PASSWORD=os.environ['EMAIL_PASSWORD'])
+    # // TODO: CHALLENGE 3
+    # // Log in into Outlook email account
+    # // Please use environment variable for security purposes
+    s = authenticate_account(EMAIL=os.environ['EMAIL_ADDRESS'], \
+      PASSWORD=os.environ['EMAIL_PASSWORD'])
 
-  # Iterate through all extracted contacts
-  for name, email in zip(names, emails):
-    message = compose_email(template, name, data_dict)
+    # Iterate through all extracted contacts
+    for name, email in zip(names, emails):
+      message = compose_email(template, name, data_dict)
 
     # Prints out the message body for message cross check
     print(message)
@@ -221,8 +221,10 @@ def main(subject, \
     # // Create, save, and attach plot
     image_name=create_plot(data_file)
 
-    img_data = open(image_name, 'rb').read()
+    img_data = open('09 jul 2021.png', 'rb').read()
+    
     image = MIMEImage(img_data, name=os.path.basename(image_name))
+    
     msg.attach(image)
     
     # send the message via the server set up earlier.
