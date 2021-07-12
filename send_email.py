@@ -48,9 +48,7 @@ def extract_summary(file_path="data_input/data.csv", id=['936','1178']):
     # Create a cost per conversion dictionary per campaign
     # Cost per conversion is spent divided by total conversion
   cpc = campaigns.groupby(['campaign_id']).sum()
-  #CPC1 = campaigns[campaigns['campaign_id'] == '936'] ['spent'] / [campaigns['campaign_id'] == '1178'] ['total_conversion']
-  #CPC = campaigns[(campaigns['campaign_id'] == '1178')|(campaigns['campaign_id'] == '936')] ['spent']/campaigns[(campaigns['campaign_id'] == '1178')|(campaigns['campaign_id'] == '936')] ['total_conversion']
-
+ 
   cpc['CPC'] = cpc['spent']/cpc['total_conversion']
 
   #cpc = campaigns.groupby(['campaign_id']).sum()
@@ -154,6 +152,8 @@ def create_plot(file_path="data_input/data.csv", id=['936', '1178']):
   # Save file to plot folder
   imagename = 'plot/'+date.today().strftime(format="%d %b %Y")+'.png'
   fig.savefig(imagename)
+
+  return imagename
 
 
 def main(subject, \
